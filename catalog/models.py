@@ -6,6 +6,28 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+from django.db.models import UniqueConstraint
+from django.db.models.functions import Lower
+
+class Language(models.Model):
+    
+    name = models.CharField(max_length=200, unique=True, help_text='Enther the books natural Lenguage')
+
+    def get_absolute_url(self):
+        return reverse('languege-detail', args=[str(self,id)])
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='language_name_case_insensitive_unique',
+                violation_error_message = "Language already exists (case insensitive match)"
+            ),
+        ]
+    
 from django.urls import reverse
 
 class Book(models.Model):
