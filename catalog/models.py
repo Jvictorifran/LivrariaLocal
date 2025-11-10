@@ -45,6 +45,11 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("book-detail", args=[str(self.id)])
     
+    def display_genre(self):
+        #revisar essa generaitor expression
+        return ' | '.join(genre.name for genre in self.genre.all()[:3])
+    
+    display_genre.short_description = 'Genre'
 import uuid 
 
 class BookInstance(models.Model):
@@ -94,3 +99,4 @@ class Author(models.Model):
     def __str__(self):
 
         return f'{self.last_name}, {self.first_name}'
+    
