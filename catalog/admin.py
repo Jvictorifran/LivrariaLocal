@@ -3,7 +3,7 @@ from catalog.models import Author, Genre, Book, BookInstance
 
 # admin.site.register(Book)
 # admin.site.register(Author)
-admin.site.register(Genre)
+# admin.site.register(Genre)
 # admin.site.register(BookInstance)
 
 
@@ -33,3 +33,6 @@ class BookInstanceAdmin(admin.ModelAdmin):
             'fields': ('status', 'due_back')
         }),
     )
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    pass 
